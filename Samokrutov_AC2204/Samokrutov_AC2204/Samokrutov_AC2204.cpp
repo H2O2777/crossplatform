@@ -42,6 +42,7 @@ void PrintTruba(const Truba& s)
 void EditTruba(Truba& s)
 {
 	s.dlina -= 1;
+	s.diametr += 2;
 }
 
 Truba LoadTruba()
@@ -60,10 +61,10 @@ void SaveTruba(const Truba& s)
 {
 	ofstream out;
 	out.open("OTBET.txt", ios::out);
-	out << "Truba: " << s.nameT
-		<< "\nLong: " << s.dlina
-		<< "\nDiameter: " << s.diametr << endl;
-	out.close();
+		out << "Truba: " << s.nameT
+			<< "\nLong: " << s.dlina
+			<< "\nDiameter: " << s.diametr << endl;
+		out.close();
 }
 
 KS InputKS()
@@ -78,12 +79,17 @@ KS InputKS()
 	return s;
 }
 
-
-void PrintKS(KS s)
+void PrintKS(const KS& s)
 {
 	cout << "Kompressor Station: " << s.nameKS
 		<< "\nAll workshop: " << s.aceh
 		<< "\nWorking workshop: " << s.wceh << endl;
+}
+
+void EditKS(KS& s)
+{
+	s.aceh -= 1;
+	s.wceh += 2;
 }
 
 KS LoadKS()
@@ -98,24 +104,86 @@ KS LoadKS()
 	return s;
 }
 
-void SaveKS(KS s)
+void SaveKS(const KS& s)
 {
 	ofstream out;
 	out.open("OTBET.txt", ios::app );
 	out << "Kompressor Station: " << s.nameKS
 		<< "\nAll workshop: " << s.aceh
 		<< "\nWorking workshop: " << s.wceh << endl;
-	out.close();
+		out.close();
+}
+
+void PrintMenu()
+{
+	cout << "1. Add Truba" << endl
+		<< "2. Add KS" << endl
+		<< "3. View Truba and KS" << endl
+		<< "4. Edit Truba" << endl
+		<< "5. Edit KS" << endl
+		<< "6. Save" << endl
+		<< "7. Load" << endl
+		<< "0. Exit" << endl;
 }
 
 int main()
 {
-	Truba tr = LoadTruba();
-	SaveTruba(tr);
-	//EditTruba(tr);
-	//PrintTruba(tr);
-	KS ks = LoadKS();
-	SaveKS(ks);
-
+	Truba tr;
+	KS ks;
+	while (1)
+	{
+		PrintMenu();
+		int i = 0;
+		cin >> i;
+		switch (i)
+		{
+		case 1:
+		{
+			tr = InputTruba();
+			break;
+		}
+		case 2:
+		{
+			ks = InputKS();
+			break;
+		}
+		case 3:
+		{
+			PrintTruba(tr);
+			PrintKS(ks);
+			break;
+		}
+		case 4:
+		{
+			EditTruba(tr);
+			break;
+		}
+		case 5:
+		{
+			EditKS(ks);
+			break;
+		}
+		case 6:
+		{
+			SaveTruba(tr);
+			SaveKS(ks);
+			break;
+		}
+		case 7:
+		{
+			tr = LoadTruba();
+			ks = LoadKS();
+			break;
+		}
+		case 0:
+		{
+			return 0;
+		}
+		default:
+		{
+			cout << "ERROR" << endl;
+		}
+		}
+	}
 	return 0;
 }
