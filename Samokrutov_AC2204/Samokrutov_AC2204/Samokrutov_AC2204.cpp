@@ -31,11 +31,16 @@ Truba InputTruba()
 	return s;
 }
 
-void PrintTruba(Truba s)
+void PrintTruba(const Truba& s)
 {
 	cout << "Truba: " << s.nameT
 		<< "\nLong: " << s.dlina
 		<< "\nDiameter: " << s.diametr << endl;
+}
+
+void EditTruba(Truba& s)
+{
+	s.dlina -= 1;
 }
 
 KS InputKS()
@@ -62,6 +67,8 @@ int main()
 {
 	Truba tr = InputTruba();
 	PrintTruba(tr);
+	//EditTruba(tr);
+	//PrintTruba(tr);
 	KS ks = InputKS();
 	PrintKS(ks);
 
