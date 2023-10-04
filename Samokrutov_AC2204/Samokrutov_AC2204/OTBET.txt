@@ -1,0 +1,6 @@
+Truba: Megatruba
+Long: 5
+Diameter: 2
+Kompressor Station: BerStation
+All workshop: 25
+Working workshop: 15

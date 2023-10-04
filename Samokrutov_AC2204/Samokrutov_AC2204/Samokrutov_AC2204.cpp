@@ -9,7 +9,7 @@ struct Truba
 	string nameT;
 	int dlina;
 	int diametr;
-	string repair;
+	bool repair;
 };
 
 struct KS
@@ -17,8 +17,24 @@ struct KS
 	string nameKS;
 	int aceh;
 	int wceh;
-	int kpd;
+	double kpd;
 };
+
+bool repair() {
+	while (true)
+	{
+		bool rep;
+		cin >> rep;
+		if (!cin)
+		{
+			cout << "Pipe under repair (0; 1): ";
+		}
+		else
+		{
+			return rep;
+		}
+	}
+}
 
 Truba InputTruba()
 {
@@ -29,6 +45,7 @@ Truba InputTruba()
 	cin >> s.dlina;
 	cout << "Truba diameter: ";
 	cin >> s.diametr;
+	cout << "Pipe under repair (0; 1): "; s.repair = repair();
 	return s;
 }
 
@@ -36,14 +53,22 @@ void PrintTruba(const Truba& s)
 {
 	cout << "Truba: " << s.nameT
 		<< "\nLong: " << s.dlina
-		<< "\nDiameter: " << s.diametr << endl;
+		<< "\nDiameter: " << s.diametr
+		<< "\nRepair status: " << s.repair << endl;
 }
 
 void EditTruba(Truba& s)
 {
-	s.dlina -= 1;
-	s.diametr += 2;
+	if (s.nameT.empty())
+	{
+		cout << "Please add a pipe." << endl;
+	}
+	else
+	{
+		cout << "Pipe under repair (0; 1): "; s.repair = repair();
+	}
 }
+
 
 Truba LoadTruba()
 {
@@ -79,6 +104,22 @@ KS InputKS()
 	return s;
 }
 
+double kpd() {
+	while (true)
+	{
+		double eff;
+		cin >> eff;
+		if (!cin)
+		{
+			cout << "kpd: ";
+		}
+		else
+		{
+			return eff;
+		}
+	}
+}
+
 void PrintKS(const KS& s)
 {
 	cout << "Kompressor Station: " << s.nameKS
@@ -88,8 +129,14 @@ void PrintKS(const KS& s)
 
 void EditKS(KS& s)
 {
-	s.aceh -= 1;
-	s.wceh += 2;
+	if (s.nameKS.empty())
+	{
+		cout << "Please add a compressor station." << endl;
+	}
+	else
+	{
+		cout << "Workshops in operation: "; s.wceh = s.aceh/s.wceh*100;
+	}
 }
 
 KS LoadKS()
