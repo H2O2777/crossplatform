@@ -17,7 +17,7 @@ struct KS
 	string nameKS;
 	int aceh;
 	int wceh;
-	double kpd;
+	int kpd;
 };
 
 bool repair() {
@@ -78,6 +78,7 @@ Truba LoadTruba()
 	in >> s.nameT;
 	in >> s.dlina;
 	in >> s.diametr;
+	in >> s.repair;
 	in.close();
 	return s;
 }
@@ -86,10 +87,11 @@ void SaveTruba(const Truba& s)
 {
 	ofstream out;
 	out.open("OTBET.txt", ios::out);
-		out << "Truba: " << s.nameT
-			<< "\nLong: " << s.dlina
-			<< "\nDiameter: " << s.diametr << endl;
-		out.close();
+	out << "Truba: " << s.nameT
+		<< "\nLong: " << s.dlina
+		<< "\nDiameter: " << s.diametr
+		<< "\nRepair status: " << s.repair << endl;
+	out.close();
 }
 
 KS InputKS()
@@ -104,7 +106,7 @@ KS InputKS()
 	return s;
 }
 
-double kpd() {
+int kpd() {
 	while (true)
 	{
 		double eff;
@@ -124,7 +126,8 @@ void PrintKS(const KS& s)
 {
 	cout << "Kompressor Station: " << s.nameKS
 		<< "\nAll workshop: " << s.aceh
-		<< "\nWorking workshop: " << s.wceh << endl;
+		<< "\nWorking workshop: " << s.wceh
+		<< "\nKPD: " << s.kpd << endl;
 }
 
 void EditKS(KS& s)
@@ -135,7 +138,7 @@ void EditKS(KS& s)
 	}
 	else
 	{
-		cout << "Workshops in operation: "; s.wceh = s.aceh/s.wceh*100;
+		s.kpd = s.aceh/s.wceh*100;
 	}
 }
 
@@ -157,8 +160,9 @@ void SaveKS(const KS& s)
 	out.open("OTBET.txt", ios::app );
 	out << "Kompressor Station: " << s.nameKS
 		<< "\nAll workshop: " << s.aceh
-		<< "\nWorking workshop: " << s.wceh << endl;
-		out.close();
+		<< "\nWorking workshop: " << s.wceh
+		<< "\nKPD: " << s.kpd << endl;
+	out.close();
 }
 
 void PrintMenu()
